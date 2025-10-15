@@ -1,24 +1,31 @@
 <?php
 $hora_actual = date("H:i:s");
-$anio_actual = date("Y");
+$year = date("Y");
 
-$api_key="e66da4a07420273cb1800d6a7cf2fda0";
-$ciudad=$_GET['city']  ?? 'madrid';
+$api_key = "e66da4a07420273cb1800d6a7cf2fda0";
+$ciudad = $_GET['city'] ?? 'madrid';
 
-$units="metric";
-$lang="es";
+$units = "metric";
+$lang = "es";
 
-$url="https://api.openweathermap.org/data/2.5/weather?q={$ciudad}&appid={$api_key}&units={$units}&lang={$lang}";
+$url = "https://api.openweathermap.org/data/2.5/weather?q={$ciudad}&appid={$api_key}&units={$units}&lang={$lang}";
 
 $ch = curl_init($url);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 $response = curl_exec($ch);
 curl_close($ch);
 
-$data = json_decode($response,true);
+$data = json_decode($response, true);
 
-if(isset($data["cod"]) && $data["cod"] == 200) {
+if (isset($data["cod"]) && $data["cod"] == 200) {
+
     $nombre = $data["name"];
+    $ciudades = [
+        'madrid' => 'Madrid',
+        'mexico' => 'Mexico',
+        'tokio' => 'Tokio'
+    ];
+
     $pais = $data["sys"]["country"];
     $temp = $data["main"]["temp"];
     $sensacion = $data["main"]["feels_like"];
@@ -32,25 +39,44 @@ if(isset($data["cod"]) && $data["cod"] == 200) {
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clima en <?php echo $nombre; ?> </title>
-    </head>
-<body>
+</head>
 
-    <div class="card" style="width: 300px;">
-        <h1><?php echo "$nombre, $pais"?></h1>
-        <img src="https://cdn-icons-png.flaticon.com/512/2640/2640490.png" style="width: 100px;" <?php echo$icono; ?>@2x.png" alt="icono">
-        <p><strong><?php echo $descripcion; ?></strong></p>
-        <p>🌡️ Temperatura: <?php echo $temp;?> °C</p>
-        <p>🧊 sensación térmica: <?php echo $sensacion?> °C</p>
-        <p>💧 Humedad: <?php echo $humedad; ?> %</p>
+<body style="margin: auto;">
+
+    <div class="card" style="display: flex; margin: 15px; justify-content: space-between;">
+        <p><?php echo "$hora_actual" ?></p>
+        <h1 style=" padding-left: 120px;"><?php echo "$nombre" ?></h1>
+        <div style="">
+            <img src="https://cdn-icons-png.flaticon.com/512/2640/2640490.png" style="width: 100px;">
+            <p><strong><?php echo $descripcion; ?></strong></p>
+            <p>🌡️ Temperatura: <?php echo $temp; ?> °C</p>
+            <p>🧊 sensación térmica: <?php echo $sensacion ?> °C</p>
+            <p>💧 Humedad: <?php echo $humedad; ?> %</p>
+        </div>
     </div>
 
-    <footer style="justify-content: center; display: flex;">
-        <p>Derechos reservados © <?php echo $anio_actual; ?> UVAQ</p>
-    </footer>
+    <?php
+    echo '<form method="get" style="margin: 15px; text-align: center; margin-top: 200px; height: 400px;">
+            <label for="city">Ciudad:</label>
+            <select id="city" name="city" required>';
+    foreach ($ciudades as $valor => $ciudad) {
+        $selected = (strtolower($nombre) == strtolower($ciudad)) ? 'selected' : '';
+        echo "<option value=\"$valor\" $selected>$ciudad</option>";
+    }
+    echo '  </select>
+            <button type="submit">Buscar</button>
+          </form>';
+    ?>
 
 </body>
+
+<footer style="justify-content: center; display: flex;">
+    <p>Derechos reservados © <?php echo $year; ?> UVAQ</p>
+</footer>
+
 </html>
