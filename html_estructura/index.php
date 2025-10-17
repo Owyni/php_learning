@@ -14,13 +14,31 @@ $tz = $timezones[$selectedCity] ?? 'UTC';
 $dt = new DateTime('now', new DateTimeZone($tz));
 $hora = $dt->format('H:i');
 $year = $dt->format('Y');
+$api_key = "e66da4a07420273cb1800d6a7cf2fda0";
+$ciudad = $_GET['city'] ?? 'madrid';
 
+$timezones = [
+    'madrid' => 'Europe/Madrid',
+    'mexico' => 'America/Mexico_City',
+    'tokio'  => 'Asia/Tokyo'
+];
+
+$selectedCity = $ciudad;
+$tz = $timezones[$selectedCity] ?? 'UTC';
+$dt = new DateTime('now', new DateTimeZone($tz));
+$hora = $dt->format('H:i');
+$year = $dt->format('Y');
+
+$units = "metric";
+$lang = "es";
 $units = "metric";
 $lang = "es";
 
 $url = "https://api.openweathermap.org/data/2.5/weather?q={$ciudad}&appid={$api_key}&units={$units}&lang={$lang}";
+$url = "https://api.openweathermap.org/data/2.5/weather?q={$ciudad}&appid={$api_key}&units={$units}&lang={$lang}";
 
 $ch = curl_init($url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 $response = curl_exec($ch);
 curl_close($ch);
@@ -28,8 +46,17 @@ curl_close($ch);
 $data = json_decode($response, true);
 
 if (isset($data["cod"]) && $data["cod"] == 200) {
+$data = json_decode($response, true);
+
+if (isset($data["cod"]) && $data["cod"] == 200) {
 
     $nombre = $data["name"];
+    $ciudades = [
+        'madrid' => 'Madrid',
+        'mexico' => 'Mexico',
+        'tokio' => 'Tokio'
+    ];
+
     $ciudades = [
         'madrid' => 'Madrid',
         'mexico' => 'Mexico',
@@ -43,6 +70,7 @@ if (isset($data["cod"]) && $data["cod"] == 200) {
     $descripcion = ucfirst($data["weather"][0]["description"]);
     $icono = $data["weather"][0]["icon"];
 
+
 } else {
     die("No se encontró ciudad: " . htmlspecialchars($ciudad));
 }
@@ -50,12 +78,16 @@ if (isset($data["cod"]) && $data["cod"] == 200) {
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <script src="myscript.js" defer></script>
     <link rel="stylesheet" href="styles.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clima en <?php echo $nombre; ?> </title>
+</head>
+
+<body style="margin: auto; background-color: gray;">
 </head>
 
 <body style="margin: auto; background-color: gray;">
