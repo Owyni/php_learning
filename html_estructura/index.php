@@ -1,9 +1,19 @@
 <?php
-$hora_actual = date("H:i:s");
-$year = date("Y");
 
 $api_key = "e66da4a07420273cb1800d6a7cf2fda0";
 $ciudad = $_GET['city'] ?? 'madrid';
+
+$timezones = [
+    'madrid' => 'Europe/Madrid',
+    'mexico' => 'America/Mexico_City',
+    'tokio'  => 'Asia/Tokyo'
+];
+
+$selectedCity = $ciudad;
+$tz = $timezones[$selectedCity] ?? 'UTC';
+$dt = new DateTime('now', new DateTimeZone($tz));
+$hora = $dt->format('H:i');
+$year = $dt->format('Y');
 
 $units = "metric";
 $lang = "es";
@@ -32,6 +42,7 @@ if (isset($data["cod"]) && $data["cod"] == 200) {
     $humedad = $data["main"]["humidity"];
     $descripcion = ucfirst($data["weather"][0]["description"]);
     $icono = $data["weather"][0]["icon"];
+
 } else {
     die("No se encontró ciudad: " . htmlspecialchars($ciudad));
 }
@@ -46,10 +57,10 @@ if (isset($data["cod"]) && $data["cod"] == 200) {
     <title>Clima en <?php echo $nombre; ?> </title>
 </head>
 
-<body style="margin: auto;">
+<body style="margin: auto; background-color: gray;">
 
     <div class="card" style="display: flex; margin: 15px; justify-content: space-between;">
-        <p><?php echo "$hora_actual" ?></p>
+        <p>🕒 Hora actual: <?php echo htmlspecialchars($hora); ?></p>
         <h1 style=" padding-left: 120px;"><?php echo "$nombre" ?></h1>
         <div style="">
             <img src="https://cdn-icons-png.flaticon.com/512/2640/2640490.png" style="width: 100px;">
