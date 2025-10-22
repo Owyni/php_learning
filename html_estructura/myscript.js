@@ -1,12 +1,20 @@
-let audio = new Audio('sentimental.mp3');
-let isPlaying = false;
+const audio = document.getElementById('myAudio');
+const botonReproducir = document.getElementById('botonReproducir');
+const botonPausa = document.getElementById('botonPausa');
 
-document.getElementById('botonReproducir').addEventListener('click', function() {
-    if (isPlaying) {
-        audio.pause();
-        isPlaying = false;
-    } else {
-        audio.play()
-        isPlaying = true;
-    }
+botonReproducir.addEventListener('click', function () {
+    audio.play();
+    botonReproducir.classList.add('hide');
+    botonPausa.classList.remove('hide');
+});
+
+botonPausa.addEventListener('click', function () {
+    audio.pause();
+    botonPausa.classList.add('hide');
+    botonReproducir.classList.remove('hide');
+});
+
+audio.addEventListener('ended', function () {
+    botonPausa.classList.add('hide');
+    botonReproducir.classList.remove('hide');
 });

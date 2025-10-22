@@ -86,14 +86,32 @@ if (isset($data["cod"]) && $data["cod"] == 200) {
     ?>
 
 <div class="audio-player">
-  <audio id="miAudio">
-    <source src="audio/music.mp3" type="audio/mpeg">
+  <audio id="myAudio">
+    <source src="sentimental.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
   </audio>
   </audio>
+</div>
 
-    <h2 style="display: flex; justify-content: center; margin-top: 100px;">PLAY</h2>
-    <button id="botonReproducir" style="display: block; margin: auto;">▶</button>
+    <style>
+        .hide {
+            display: none !important;
+        }
+        .control-button {
+            display: block;
+            margin: auto;
+            width: 64px;
+            height: 64px;
+            border: none;
+            background-color: transparent;
+            background-size: contain;
+            background-repeat: no-repeat;
+            cursor: pointer;
+        }
+    </style>
+
+    <button id="botonReproducir" class="control-button" style="background-image: url('play.jpg');"></button>
+    <button id="botonPausa" class="control-button hide" style="background-image: url('pause.jpg');"></button>
 
 
 </body>
