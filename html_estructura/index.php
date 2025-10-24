@@ -81,6 +81,20 @@ if (isset($data["cod"]) && $data["cod"] == 200) {
           </form>';
             ?>
 
+            <form action="guardar.php" method="POST" class="user-form">
+                <h2>Registro de Usuario</h2>
+                <label>Nombre:</label><br>
+                <input type="text" name="nombre" required><br><br>
+
+                <label>Edad:</label><br>
+                <input type="number" name="edad" required><br><br>
+
+                <label>Profesión:</label><br>
+                <input type="text" name="profesion" required><br><br>
+
+                <button type="submit">Guardar en JSON</button>
+            </form>
+
             <div class="audio-player">
                 <audio id="myAudio">
                     <source src="sentimental.mp3" type="audio/mpeg">
@@ -89,8 +103,10 @@ if (isset($data["cod"]) && $data["cod"] == 200) {
                 </audio>
             </div>
 
-            <button id="botonReproducir" class="control-button" style="background-image: url('play.jpg'); border-radius: 40%;"></button>
-            <button id="botonPausa" class="control-button hide" style="background-image: url('pause.jpg'); border-radius: 40%;"></button>
+            <button id="botonReproducir" class="control-button"
+                style="background-image: url('play.jpg'); border-radius: 40%;"></button>
+            <button id="botonPausa" class="control-button hide"
+                style="background-image: url('pause.jpg'); border-radius: 40%;"></button>
 
         </main>
 
@@ -108,4 +124,4 @@ if (isset($data["cod"]) && $data["cod"] == 200) {
 
 </body>
 
-</html>
+</html>d

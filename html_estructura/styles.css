@@ -85,3 +85,8 @@ footer {
     background-repeat: no-repeat;
     cursor: pointer;
 }
+
+.user-form {
+    text-align: center;
+    margin: 40px;
+}
