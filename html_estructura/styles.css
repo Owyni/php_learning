@@ -1,0 +1,87 @@
+/* Estilos básicos para la demostración */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    /* Usamos flexbox para la distribución de columnas */
+    min-height: 100vh;
+    /* Para que ocupe toda la altura de la ventana */
+}
+
+/* Contenedores de las columnas */
+#contenedor-principal {
+    display: flex;
+    width: 100%;
+}
+
+/* Estilos del lateral izquierdo */
+.lateral-izquierdo {
+    text-align: center;
+    width: 20%;
+    background-color: #00808f;
+    box-sizing: border-box;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    border-right: 1px solid #006d7a;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.lateral-izquierdo:hover {
+    background-color: #006d7a;
+}
+
+.lateral-izquierdo .hora {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+/* Estilos del centro (más grande) */
+.centro {
+    flex-grow: 1;
+    background-color: black;
+    color: white;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Estilos del lateral derecho */
+.lateral-derecho {
+    text-align: center;
+    width: 20%;
+    background-color: #00808f;
+    box-sizing: border-box;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    border-right: 1px solid #006d7a;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.lateral-derecho:hover {
+    background-color: #006d7a;
+}
+
+/* Opcional: Estilos para el encabezado y pie de página */
+header,
+footer {
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+    background-color: #333;
+    color: white;
+}
+
+.hide {
+    display: none !important;
+}
+
+.control-button {
+    display: block;
+    margin: auto;
+    width: 64px;
+    height: 64px;
+    border: none;
+    background-color: transparent;
+    background-size: contain;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}

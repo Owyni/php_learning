@@ -6,7 +6,7 @@ $ciudad = $_GET['city'] ?? 'madrid';
 $timezones = [
     'madrid' => 'Europe/Madrid',
     'mexico' => 'America/Mexico_City',
-    'tokio'  => 'Asia/Tokyo'
+    'tokio' => 'Asia/Tokyo'
 ];
 
 $selectedCity = $ciudad;
@@ -50,74 +50,62 @@ if (isset($data["cod"]) && $data["cod"] == 200) {
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-    <script src="myscript.js" defer></script>
-    <link rel="stylesheet" href="styles.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clima en <?php echo $nombre; ?> </title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="myscript.js" defer></script>
 </head>
 
-<body style="margin: auto; background-color: gray;">
+<body>
 
-    <div class="card" style="display: flex; margin: 15px; justify-content: space-between;">
-        <p>🕒 Hora actual: <?php echo htmlspecialchars($hora); ?></p>
-        <h1><?php echo "$nombre" ?></h1>
-        <div style="">
-            <img src="https://cdn-icons-png.flaticon.com/512/2640/2640490.png" style="width: 100px;">
-            <p><strong><?php echo $descripcion; ?></strong></p>
-            <p>🌡️ Temperatura: <?php echo $temp; ?> °C</p>
-            <p>🧊 sensación térmica: <?php echo $sensacion ?> °C</p>
-            <p>💧 Humedad: <?php echo $humedad; ?> %</p>
-        </div>
-    </div>
+    <div id="contenedor-principal">
 
-    <?php
-    echo '<form method="get" style="margin: 15px; text-align: center; margin-top: 200px;">
+        <aside class="lateral-izquierdo">
+            <p class="hora">🕒 Hora actual: <?php echo htmlspecialchars($hora); ?></p>
+        </aside>
+
+        <main class="centro">
+            <?php
+            echo '<form method="get">
             <label for="city">Ciudad:</label>
             <select id="city" name="city" required>';
-    foreach ($ciudades as $valor => $ciudad) {
-        $selected = (strtolower($nombre) == strtolower($ciudad)) ? 'selected' : '';
-        echo "<option value=\"$valor\" $selected>$ciudad</option>";
-    }
-    echo '  </select>
+            foreach ($ciudades as $valor => $ciudad) {
+                $selected = (strtolower($nombre) == strtolower($ciudad)) ? 'selected' : '';
+                echo "<option value=\"$valor\" $selected>$ciudad</option>";
+            }
+            echo '  </select>
             <button type="submit">Buscar</button>
           </form>';
-    ?>
+            ?>
 
-<div class="audio-player">
-  <audio id="myAudio">
-    <source src="sentimental.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
-  </audio>
-</div>
+            <div class="audio-player">
+                <audio id="myAudio">
+                    <source src="sentimental.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+                </audio>
+            </div>
 
-    <style>
-        .hide {
-            display: none !important;
-        }
-        .control-button {
-            display: block;
-            margin: auto;
-            width: 64px;
-            height: 64px;
-            border: none;
-            background-color: transparent;
-            background-size: contain;
-            background-repeat: no-repeat;
-            cursor: pointer;
-        }
-    </style>
+            <button id="botonReproducir" class="control-button" style="background-image: url('play.jpg'); border-radius: 40%;"></button>
+            <button id="botonPausa" class="control-button hide" style="background-image: url('pause.jpg'); border-radius: 40%;"></button>
 
-    <button id="botonReproducir" class="control-button" style="background-image: url('play.jpg');"></button>
-    <button id="botonPausa" class="control-button hide" style="background-image: url('pause.jpg');"></button>
+        </main>
 
+        <aside class="lateral-derecho">
+            <div>
+                <img src="https://cdn-icons-png.flaticon.com/512/2640/2640490.png" style="width: 100px;">
+                <p><strong><?php echo $descripcion; ?></strong></p>
+                <p>🌡️ Temperatura: <?php echo $temp; ?> °C</p>
+                <p>🧊 sensación térmica: <?php echo $sensacion ?> °C</p>
+                <p>💧 Humedad: <?php echo $humedad; ?> %</p>
+            </div>
+        </aside>
+
+    </div>
 
 </body>
-
-<footer style="justify-content: center; display: flex; margin-top: 200px;">
-    <p>Derechos reservados © <?php echo $year; ?> UVAQ</p>
-</footer>
 
 </html>
