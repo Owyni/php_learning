@@ -46,6 +46,7 @@ if (isset($data["cod"]) && $data["cod"] == 200) {
 } else {
     die("No se encontró ciudad: " . htmlspecialchars($ciudad));
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -124,4 +125,4 @@ if (isset($data["cod"]) && $data["cod"] == 200) {
 
 </body>
 
-</html>d
+</html>
