@@ -6,7 +6,7 @@ $ciudad = $_GET['city'] ?? 'madrid';
 $timezones = [
     'madrid' => 'Europe/Madrid',
     'mexico' => 'America/Mexico_City',
-    'tokio' => 'Asia/Tokyo'
+    'tokyo' => 'Asia/Tokyo'
 ];
 
 $selectedCity = $ciudad;
@@ -33,7 +33,7 @@ if (isset($data["cod"]) && $data["cod"] == 200) {
     $ciudades = [
         'madrid' => 'Madrid',
         'mexico' => 'Mexico',
-        'tokio' => 'Tokio'
+        'tokyo' => 'Tokyo'
     ];
 
     $pais = $data["sys"]["country"];
@@ -74,7 +74,7 @@ if (isset($data["cod"]) && $data["cod"] == 200) {
             <label for="city">Ciudad:</label>
             <select id="city" name="city" required>';
             foreach ($ciudades as $valor => $ciudad) {
-                $selected = (strtolower($nombre) == strtolower($ciudad)) ? 'selected' : '';
+                $selected = ($selectedCity === $valor) ? 'selected' : '';
                 echo "<option value=\"$valor\" $selected>$ciudad</option>";
             }
             echo '  </select>
