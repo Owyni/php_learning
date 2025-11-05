@@ -14,6 +14,7 @@ $tz = $timezones[$selectedCity] ?? 'UTC';
 $dt = new DateTime('now', new DateTimeZone($tz));
 $hora = $dt->format('H:i');
 $year = $dt->format('Y');
+$audio_source = 'songs/sentimental.mp3';
 
 $units = "metric";
 $lang = "es";
@@ -98,7 +99,7 @@ if (isset($data["cod"]) && $data["cod"] == 200) {
 
             <div class="audio-player">
                 <audio id="myAudio">
-                    <source src="sentimental.mp3" type="audio/mpeg">
+                    <source src="<?php echo htmlspecialchars($audio_source); ?>" type="audio/mpeg">
                     Your browser does not support the audio element.
                 </audio>
                 </audio>
